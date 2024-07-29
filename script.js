@@ -1,16 +1,18 @@
 // your code here
 document.getElementById('button').addEventListener('click', function() {
-            // Get the values from the input fields
-            const name = document.getElementById('name').value;
-            const year = document.getElementById('year').value;
-
-            // Construct the URL with query parameters
-            const baseURL = 'https://localhost:8080/';
-            const queryParams = `?name=${encodeURIComponent(name)}&year=${encodeURIComponent(year)}`;
-	        const queryParams1 = `?name=${encodeURIComponent(name)}`;
-	        const queryParams2 = `?name=${encodeURIComponent(name)}&year=${encodeURIComponent(year)}`;
-            const fullURL = baseURL + queryParams;
-
-            // Update the h3 element with the new URL
-            document.getElementById('url').textContent = fullURL;
-        });
+    const name = document.getElementById('name').value;
+    const year = document.getElementById('year').value;
+    let url = 'https://localhost:8080/';
+    // Construct query string
+    const queryParams = [];
+    if (name) {
+        queryParams.push(`name=${encodeURIComponent(name)}`);
+    }
+    if (year) {
+        queryParams.push(`year=${encodeURIComponent(year)}`);
+    }
+    if (queryParams.length > 0) {
+        url += '?' + queryParams.join('&');
+    }
+    document.getElementById('url').textContent = url;
+});
